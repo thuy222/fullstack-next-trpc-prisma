@@ -3,9 +3,9 @@ import { ImageBox } from '@/app/components/core/ImageBox';
 import { HeartIcon } from '@/app/components/icon/HeartIcon';
 import { SlideIcon } from '@/app/components/icon/SlideIcon';
 import { TEXT_BY_STORE_CATEGORY } from '@/app/constants';
-import { getRandomImage } from '@/app/helpers';
-import { RestaurantType } from '@/app/types/restaurant';
+import { getRandomImage, transformFeaturedData } from '@/app/helpers/restaurants';
 import { trpc } from '@/utils/trpc';
+import { Restaurant as RestaurantType } from '@prisma/client';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -68,17 +68,17 @@ const Restaurant = ({ restaurant }: Props) => {
       </div>
       <div className="mt-2 w-full">
         <div className={`flex items-start gap-1 md:gap-2`}>
-          {featured.icon && (
-            <Image
-              src={`/${featured.icon}.svg`}
-              width={15}
-              height={15}
-              alt="stars"
-              className="h-[15px] w-[15px] md:h-[18px] md:w-[18px]"
-              priority={true}
-            />
-          )}
-          <p className="truncate text-xs text-orange md:text-sm">{featured.text}</p>
+          <Image
+            src={`/${transformFeaturedData(featured).icon}.svg`}
+            width={15}
+            height={15}
+            alt="stars"
+            className="h-[15px] w-[15px] md:h-[18px] md:w-[18px]"
+            priority={true}
+          />
+          <p className="truncate text-xs text-orange md:text-sm">
+            {transformFeaturedData(featured).text}
+          </p>
         </div>
         <div className="flex items-center justify-between gap-1 md:gap-2">
           <p className={`w-[80%] shrink truncate text-base font-bold text-primary md:text-lg`}>
