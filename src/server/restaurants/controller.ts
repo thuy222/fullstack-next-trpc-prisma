@@ -1,6 +1,6 @@
-import prisma from '@/prisma/prisma-client';
 import { TRPCError } from '@trpc/server';
 import { UpdateFavoriteInput } from './schema';
+import prisma from '../../../prisma/prisma-client';
 
 export const getRestaurants = async () => {
   try {

@@ -1,8 +1,7 @@
-// import { restaurantRoute } from '@/server/restaurant';
-import { restaurantRoute } from '@/server/restaurants/routes';
-import { t } from '@/utils/trpc-server';
 import { createServerSideHelpers } from '@trpc/react-query/server';
 import SuperJSON from 'superjson';
+import { restaurantRoute } from '~/server/restaurants/routes';
+import { t } from '~/trpc/trpc-server';
 
 const healthCheckerRouter = t.router({
   healthchecker: t.procedure.query(({ ctx }) => {

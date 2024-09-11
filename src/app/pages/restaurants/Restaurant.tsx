@@ -1,13 +1,14 @@
 'use client';
-import { ImageBox } from '@/app/components/core/ImageBox';
-import { HeartIcon } from '@/app/components/icon/HeartIcon';
-import { SlideIcon } from '@/app/components/icon/SlideIcon';
-import { TEXT_BY_STORE_CATEGORY } from '@/app/constants';
-import { getRandomImage, transformFeaturedData } from '@/app/helpers/restaurants';
-import { trpc } from '@/utils/trpc';
+import React, { useState } from 'react';
 import { Restaurant as RestaurantType } from '@prisma/client';
 import Image from 'next/image';
-import React, { useState } from 'react';
+
+import { HeartIcon } from '../../components/icon/HeartIcon';
+import { ImageBox } from '../../components/core/ImageBox';
+import { SlideIcon } from '../../components/icon/SlideIcon';
+import { getRandomImage, transformFeaturedData } from '../../helpers/restaurants';
+import { TEXT_BY_STORE_CATEGORY } from '../../constants';
+import { trpc } from '~/trpc/trpc';
 
 type Props = Readonly<{
   restaurant: RestaurantType;

@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import { trpc } from '@/utils/trpc';
 import Restaurant from './Restaurant';
-import { SearchInput } from '@/app/components/core/SearchInput';
-import Loading from '@/app/components/core/Loading';
+import Loading from '../../components/core/Loading';
+import { SearchInput } from '../../components/core/SearchInput';
+import { trpc } from '~/trpc/trpc';
 
 export const Restaurants = () => {
   const { data, isLoading } = trpc.getRestaurants.useQuery();
