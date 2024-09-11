@@ -1,11 +1,9 @@
-### Prerequisites
+**Prerequisites:**
 
 - nodejs (from v18)
 - npm (from v6)
 - pnpm (from v9)
 - docker installed
-
-### How to run project
 
 **Clone the repository:**
 
