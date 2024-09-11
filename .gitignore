@@ -1,0 +1,16 @@
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+# misc
+.DS_Store
+*.pem
+# next.js
+/.next/
+/out/
+# typescript
+next-env.d.ts
+
+*.env

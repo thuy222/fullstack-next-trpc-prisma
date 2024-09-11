@@ -1,45 +1,49 @@
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
-
 - nodejs (from v18)
 - npm (from v6)
 - pnpm (from v9)
-- docker
+- docker installed
 
 ### How to run project
 
-1. **Clone the repository:**
+**Clone the repository:**
 
-   ```bash
-   git clone
-   ```
+```bash
+   git clone https://github.com/thuy222/fullstack-next-trpc-prisma.git
+```
 
-2. **Set up env:**
+**Set up env:**
 
-   - Copy `.env.test` to `.env`
+Copy `.env.test` to `.env` (Since the ".env" file is .gitignored)
 
-3. **Install dependencies:**
+**Install dependencies:**
 
-   ```bash
-   yarn || npm
-   ```
+```bash
+   npm install || yarn
+```
 
-4. **Docker set up**
+**Docker set up**
 
-   ```bash
+```bash
    docker compose up -d
-   ```
+```
 
-5. **Prisma setup**
+**Prisma setup**
 
-   ```bash
+```bash
    npx prisma migrate dev
    npm run prisma-seed
-   ```
+```
 
-6. **Start the backend server:**
+**Run app:**
 
-   ```bash
-   npm run dev || yarn dev
-   ```
+```bash
+  npm run dev || yarn dev
+```
+
+**See database**
+
+```bash
+npx prisma studio
+```
