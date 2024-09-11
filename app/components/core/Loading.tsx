@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <div className="absolute z-10 flex h-full w-full items-center justify-center bg-white bg-opacity-60">
       <div className="flex items-center">
-        <span className="mr-4 text-3xl">Loading</span>
+        <span className="mr-4 text-3xl">Loading...</span>
         <svg
           className="h-5 w-5 animate-spin text-gray-600"
           xmlns="http://www.w3.org/2000/svg"
