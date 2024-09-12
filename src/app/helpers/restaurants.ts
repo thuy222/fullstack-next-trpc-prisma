@@ -1,5 +1,6 @@
 //helpers for restaurant only
 import { Prisma } from "@prisma/client";
+import { TEXT_BY_STORE_CATEGORY } from "../constants";
 
 export const transformFeaturedData = (featured: Prisma.JsonValue) => {
     if (typeof featured === 'object' && featured !== null && 'icon' in featured && "text" in featured) {
@@ -23,4 +24,14 @@ export const getRandomImage = (images: Array<string> | any) => {
 
   return images[randomIndex]
 
+}
+
+export const transformTabOptions = () => {
+  return Object.values(TEXT_BY_STORE_CATEGORY).map((key, index) => {
+    return {
+      label: key,
+      value: key,
+      id: index,
+    };
+  });
 }
