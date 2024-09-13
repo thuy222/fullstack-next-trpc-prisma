@@ -27,7 +27,7 @@ export const getRandomImage = (images: Array<string> | any) => {
 }
 
 export const transformTabOptions = () => {
-  return Object.values(TEXT_BY_STORE_CATEGORY).map((key, index) => {
+  return Object.keys(TEXT_BY_STORE_CATEGORY).map((key, index) => {
     return {
       label: key,
       value: key,

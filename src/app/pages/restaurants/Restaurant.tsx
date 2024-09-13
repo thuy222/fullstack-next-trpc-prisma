@@ -30,7 +30,7 @@ const Restaurant = ({ restaurant }: Props) => {
   } = restaurant;
 
   const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
-  const { mutate, isLoading, isSuccess } = trpc.updateFavorite.useMutation({
+  const { mutate, isLoading, isSuccess } = trpc.addFavorite.useMutation({
     onSuccess: (resp) => {
       setIsFavoriteState(resp.data.isFavorite);
     },
@@ -42,7 +42,7 @@ const Restaurant = ({ restaurant }: Props) => {
 
   const handleClickFavorite = () => {
     setIsFavoriteState(!isFavoriteState); // immediately update UI, then based on api response to update again
-    mutate({ id: id, favorite: !isFavoriteState });
+    mutate({ id });
   };
 
   return (

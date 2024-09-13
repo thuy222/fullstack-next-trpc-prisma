@@ -5,11 +5,10 @@ import Hydrate from '~/trpc/hydrate-client';
 
 export default async function Home() {
   const helpers = createSSRHelper();
-  await helpers.getRestaurants.prefetch();
   return (
     <Hydrate state={dehydrate(helpers.queryClient)}>
       <main
-        style={{ maxWidth: 1200, marginInline: 'auto', padding: 20 }}
+        style={{ maxWidth: 400, marginInline: 'auto', padding: 20 }}
         className="items-center md:flex md:flex-col md:gap-6"
       >
         <Restaurants />

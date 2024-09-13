@@ -8,7 +8,7 @@ type TabProps = Readonly<{
 }>;
 
 const Tabs = (props: TabProps) => {
-  const { tabs, onTabChange, defaultTab = tabs[0].value } = props;
+  const { tabs, onTabChange, defaultTab = '' } = props;
 
   const [active, setActive] = useState(defaultTab);
 

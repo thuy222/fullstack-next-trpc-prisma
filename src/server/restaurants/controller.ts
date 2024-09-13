@@ -1,27 +1,28 @@
 import { TRPCError } from '@trpc/server';
-import { UpdateFavoriteInput } from './schema';
 import prisma from '../../../prisma/prisma-client';
+import { Prisma } from '@prisma/client';
 
-export const getRestaurants = async () => {
+export const getRestaurants = async (search?: string, category?:string) => {
   try {
-    const queryFields = {
-      id: true,
-      name: true,
-      images: true,
-      isFavorite: true,
-      category: true,
-      city: true,
-      priceRange: true,
-      createdAt: true,
-      desc: true,
-      featured: true,
-      rating: true,
-      ratingCount: true,
-      updatedAt: true,
-    };
+    const where: Partial<Prisma.RestaurantWhereInput> = {};
+
+    if (search !== "") {
+      where.OR = [
+        { name: { contains: search } },
+        { desc: { contains: search } },
+      ];
+    }
+
+    if (category !== "") {
+      where.category = category as  Prisma.EnumSTORE_CATEGORYFilter<"Restaurant">;
+    }
     const restaurants = await prisma.restaurant.findMany({
-      select: queryFields,
+      where,
+      orderBy: {
+        name: "asc",
+      },
     });
+
     return {
       status: 'success',
       restaurants,
@@ -34,22 +35,28 @@ export const getRestaurants = async () => {
   }
 };
 
-export const updateFavorite = async ({ input }: { input: UpdateFavoriteInput }) => {
+export const updateFavorite = async (id: string) => {
   try {
-    const restaurant = await prisma.restaurant.update({
+    const restaurant = await prisma.restaurant.findUnique({
       where: {
-        id: input.id,
-      },
-      data: {
-        isFavorite: input.favorite,
+        id: id,
       },
     });
+
+    if (!restaurant) throw new Error("Not found");
+
+   const updatedRestaurant =  await prisma.restaurant.update({
+      where: {
+        id: restaurant.id,
+      },
+      data: {
+        isFavorite: !restaurant.isFavorite,
+      },
+    });
+
     return {
       status: 'success',
-      data: {
-        id: restaurant.id,
-        isFavorite: restaurant.isFavorite,
-      },
+      data: updatedRestaurant
     };
   } catch (err: any) {
     throw new TRPCError({
