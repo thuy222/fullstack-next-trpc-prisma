@@ -9,6 +9,8 @@ import { SlideIcon } from '../../components/icon/SlideIcon';
 import { getRandomImage, transformFeaturedData } from '../../helpers/restaurants';
 import { TEXT_BY_STORE_CATEGORY } from '../../constants';
 import { trpc } from '~/trpc/trpc';
+import { useToast } from '~/app/hooks/useToast';
+import ToastContainer from '~/app/components/core/ToastMessage';
 
 type Props = Readonly<{
   restaurant: RestaurantType;
@@ -30,13 +32,18 @@ const Restaurant = ({ restaurant }: Props) => {
   } = restaurant;
 
   const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
+  const { toasts, addToast, removeToast } = useToast();
   const { mutate, isLoading, isSuccess } = trpc.addFavorite.useMutation({
     onSuccess: (resp) => {
+      addToast(
+        resp.data.isFavorite ? `Add to favorite successfully` : `Remove from favorite successfully`,
+        'success',
+      );
       setIsFavoriteState(resp.data.isFavorite);
     },
     onError: () => {
-      //if error, set back to original
-      setIsFavoriteState(isFavorite);
+      setIsFavoriteState(isFavorite); //if error, set back to original
+      addToast('Some thing went wrong', 'error');
     },
   });
 
@@ -105,6 +112,7 @@ const Restaurant = ({ restaurant }: Props) => {
           {`· ${priceRange} won`}
         </p>
       </div>
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
     </div>
   );
 };
