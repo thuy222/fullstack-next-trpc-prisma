@@ -25,3 +25,9 @@ export const TEXT_BY_STORE_CATEGORY: CategoryText = {
   [STORE_CATEGORY.IZAKAYA]: '이자카야·바',
   [STORE_CATEGORY.OTHER]: '기타 일본 음식',
 };
+
+export const TOAST_MESSAGE_COLOR = {
+    success: 'bg-green-500',
+    error: 'bg-red-500',
+    info: 'bg-blue-500',
+}

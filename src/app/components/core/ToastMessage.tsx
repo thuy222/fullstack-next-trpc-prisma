@@ -1,5 +1,6 @@
 // ToastContainer.tsx
 import React from 'react';
+import { TOAST_MESSAGE_COLOR } from '~/app/constants';
 import { Toast } from '~/app/hooks/useToast';
 
 interface ToastContainerProps {
@@ -8,30 +9,12 @@ interface ToastContainerProps {
 }
 
 const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, removeToast }) => {
-  const getToastColor = (type: Toast['type']) => {
-    let color = '';
-    switch (type) {
-      case 'success':
-        color = 'bg-green-500';
-        break;
-      case 'error':
-        color = 'bg-red-500';
-        break;
-      case 'info':
-        color = 'bg-blue-500';
-        break;
-      default:
-        break;
-    }
-    return color;
-  };
-
   return (
     <div className="fixed right-5 top-5 space-y-2">
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={`role="alert" h-100 flex w-full max-w-xs items-center rounded py-2 text-white shadow transition-opacity duration-300 dark:text-gray-400 ${getToastColor(toast.type)}`}
+          className={`role="alert" h-100 flex w-full max-w-xs items-center rounded py-2 text-white shadow transition-opacity duration-300 dark:text-gray-400 ${TOAST_MESSAGE_COLOR[toast.type]}`}
         >
           <div className="ms-3 text-sm font-normal">{toast.message}</div>
           <button
